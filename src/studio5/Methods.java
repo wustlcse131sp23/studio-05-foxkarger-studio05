@@ -1,5 +1,7 @@
 package studio5;
 
+import java.lang.reflect.Method;
+
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Methods {
@@ -16,7 +18,7 @@ public class Methods {
 	public static double distanceBetween(double x1, double y1, double x2, double y2) {
 		double distance = 0;
 		// FIXME: Hint use Math methods (e.g. Math.sqrt) to compute the distance
-		
+		distance= Math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
 		return distance;
 	}
 
@@ -35,19 +37,24 @@ public class Methods {
 		// Blue ring with 3.0/4.0 the radius
 		// suggested rgb values: 0, 109, 219
 
-		
+		double radius2= (3.0/4.0) * radius;
+		StdDraw.setPenColor(0,109,219);
+		StdDraw.filledCircle(x,y,radius2);
 
 		// Red ring with 1.0/2.0 the radius
 		// suggested rgb values: 146, 0, 0
+		double radius3= (1.0/2.0) * radius;
+		StdDraw.setPenColor(146,0,0);
+		StdDraw.filledCircle(x,y,radius3);
 
-		
 
 		// Yellow ring with 1.0/4.0 the radius
 		// suggested rgb values: 255, 255, 109
+		double radius4= (1.0/4.0) * radius;
+		StdDraw.setPenColor(255,255,109);
+		StdDraw.filledCircle(x,y,radius4);
 
-		
 	}
-
 	/**
 	 * Return a new String which is the original source String with all occurrences
 	 * of the target character substituted by the replacement String.
@@ -60,9 +67,21 @@ public class Methods {
 	 *         characters in the source String with the replacement String
 	 */
 	public static String substituteAll(String source, char target, String replacement) {
-		String result = "";
+		for (int i=0; i<source.length(); i++)
+		{
+			if (source.charAt(i)==target)
+			{
+
+				String to=source.substring(0,i);
+				source= to  + replacement + source.substring(i+1); //i is target so do i+1
+				i=i+replacement.length();
+			}
+
+		}
+
+		String result = source;
 		// TODO: Finish this method
-		
+
 		return result;
 	}
 
@@ -74,8 +93,12 @@ public class Methods {
 	 */
 	public static int arraySum(int[] values) {
 		int sum = 0;
+		for (int j=0; j<values.length; j++)
+		{
+			sum = sum+values[j];
+		}
 		// FIXME: Compute the sum of the values in an array
-		
+
 		return sum;
 	}
 
@@ -87,16 +110,24 @@ public class Methods {
 	 * @return and array of size that's filled with value
 	 */
 	public static int[] filledArray(int length, int value) {
-		int[] values = null; // FIXME: Create an array of the appropriate size
+		int[] values = new int[length]; // FIXME: Create an array of the appropriate size
 		// TODO: Finish this method
+		for (int k=0; k<length; k++)
+		{
+			values[k]=value;
+		}
 
-		
 
 		return values;
 	}
+	public static void main(String[]args) {
+		drawBullsEye(0.5, 0.5, 0.5); 
 
-	// TODO: Create an arrayMean method which accepts an int array of values parameter.
-	// TODO: Create a JavaDoc comment for the arrayMean method.
-
-	
+	}
 }
+
+// TODO: Create an arrayMean method which accepts an int array of values parameter.
+// TODO: Create a JavaDoc comment for the arrayMean method.
+
+
+
